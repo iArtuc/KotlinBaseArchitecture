@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <attr name="typeface" format="enum">
+        <enum name="regular" value="0"/>
+        <enum name="medium" value="1"/>
+        <enum name="light" value="2"/>
+    </attr>
+
+    <!-- Tell Android that the class "CustomButton" can be styled,
+         and which attributes it supports -->
+    <declare-styleable name="CustomText">
+        <attr name="typeface"/>
+    </declare-styleable>
+
+</resources>

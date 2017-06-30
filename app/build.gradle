@@ -1,0 +1,165 @@
+apply plugin: 'com.android.application'
+
+apply plugin: 'kotlin-android'
+
+apply plugin: 'kotlin-android-extensions'
+
+apply plugin: 'kotlin-kapt'
+
+apply plugin: 'realm-android'
+
+//
+//
+//allprojects {
+//    repositories {
+//        jcenter()
+//        maven { url "http://dl.bintray.com/kotlin/kotlin-dev" }
+//    }
+//}
+
+buildscript {
+    repositories {
+        jcenter()
+        mavenCentral()
+    }
+    dependencies {
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+    }
+}
+
+android {
+    compileSdkVersion 26
+    buildToolsVersion "26.0.0"
+    defaultConfig {
+        applicationId "kotlintutorial.tretton37.com.kotlintutorial"
+        minSdkVersion 15
+        targetSdkVersion 26
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        multiDexEnabled true
+    }
+    buildTypes {
+        release {
+//            signingConfig signingConfigs.release
+
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+
+        debug {
+            versionNameSuffix ".Debug"
+            debuggable true
+        }
+
+
+    }
+    dataBinding {
+        enabled = true
+    }
+    lintOptions {
+        warning 'InvalidPackage'
+        lintConfig rootProject.file('lint.xml')
+    }
+
+    packagingOptions {
+        exclude 'META-INF/LICENSE'
+        exclude 'META-INF/NOTICE'
+        exclude 'META-INF/rxjava.properties'
+//        exclide 'META-INF/rxjava.properties'
+        pickFirst 'META-INF/ASL2.0'
+        pickFirst 'META-INF/LICENSE.txt'
+        pickFirst 'META-INF/NOTICE.txt'
+    }
+}
+
+
+repositories {
+    jcenter()
+}
+
+
+
+kapt {
+    generateStubs = true
+    dependencies {
+        implementation fileTree(dir: 'libs', include: ['*.jar'])
+        androidTestImplementation('com.android.support.test.espresso:espresso-core:2.2.2', {
+            exclude group: 'com.android.support', module: 'support-annotations'
+        })
+        implementation "com.android.support:appcompat-v7:$supportLibVersion"
+        testImplementation 'junit:junit:4.12'
+        implementation 'com.android.support.constraint:constraint-layout:1.0.2'
+        implementation "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
+        compile 'com.android.support:multidex:1.0.1'
+
+        //Anko kotlin lib
+        compile("org.jetbrains.anko:anko:$anko_version") {
+            exclude group: 'com.google.android', module: 'android'
+        }
+
+        //Arch lifecycle
+        compile "android.arch.persistence.room:runtime:$arch_version"
+        compile "android.arch.lifecycle:runtime:$arch_version"
+        compile "android.arch.lifecycle:extensions:$arch_version"
+
+        annotationProcessor "android.arch.persistence.room:compiler:$arch_version"
+        annotationProcessor "android.arch.lifecycle:compiler:$arch_version"
+
+        androidTestCompile("android.arch.core:core-testing:$arch_version", {
+        })
+
+        //Beautify
+        compile 'com.squareup.picasso:picasso:2.5.2'
+
+        //DI
+        compile "com.google.dagger:dagger:$dagger_version"
+        provided 'org.glassfish:javax.annotation:10.0-b28'
+        kapt "com.google.dagger:dagger-compiler:$dagger_version"
+
+        //Network
+
+        compile "com.squareup.retrofit2:retrofit:$retrofitVersion"
+        compile "com.squareup.retrofit2:converter-gson:$retrofitVersion"
+        compile "com.squareup.retrofit2:adapter-rxjava:$retrofitVersion"
+        compile "com.squareup.retrofit2:converter-moshi:$retrofitVersion"
+        compile 'com.jakewharton.retrofit:retrofit2-rxjava2-adapter:1.0.0'
+        compile "com.squareup.okhttp3:logging-interceptor:3.7.0"
+        compile 'com.squareup.okhttp3:okhttp:3.8.0'
+
+        //RxKotlin
+        compile 'io.reactivex.rxjava2:rxjava:2.1.0'
+        compile 'io.reactivex.rxjava2:rxandroid:2.0.1'
+        compile 'io.reactivex.rxjava2:rxkotlin:2.1.0'
+
+        //Jake
+        compile 'com.jakewharton.timber:timber:4.3.1'
+        compile "com.jakewharton:butterknife:$butterknife_version"
+        kapt "com.jakewharton:butterknife-compiler:$butterknife_version"
+
+        //LeakCanary
+        debugCompile "com.squareup.leakcanary:leakcanary-android:$leakCanaryVersion"
+        releaseCompile "com.squareup.leakcanary:leakcanary-android-no-op:$leakCanaryVersion"
+        testCompile "com.squareup.leakcanary:leakcanary-android-no-op:$leakCanaryVersion"
+
+        //FireBase
+        implementation "com.google.firebase:firebase-messaging:$fireBaseVersion"
+        implementation "com.google.firebase:firebase-crash:$fireBaseVersion"
+        implementation "com.google.firebase:firebase-database:$fireBaseVersion"
+
+        // Unit tests dependencies
+        testCompile jUnit
+        testCompile mockito
+        testCompile "org.hamcrest:hamcrest-core:$HAMCREST_VERSION"
+        testCompile "org.hamcrest:hamcrest-library:$HAMCREST_VERSION"
+        testCompile "org.hamcrest:hamcrest-integration:$HAMCREST_VERSION"
+        testCompile "org.powermock:powermock-api-mockito:$POWER_MOCKITO_VERSION"
+        testCompile "org.powermock:powermock-module-junit4-rule-agent:$POWER_MOCKITO_VERSION"
+        testCompile "org.powermock:powermock-module-junit4-rule:$POWER_MOCKITO_VERSION"
+        testCompile "org.powermock:powermock-module-junit4:$POWER_MOCKITO_VERSION"
+
+        compile 'com.google.code.findbugs:jsr305:3.0.2'
+    }
+}
+
+apply plugin: 'com.google.gms.google-services'

@@ -1,0 +1,35 @@
+<animation-list
+    android:id="@+id/myprogressrbar"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:oneshot="false">
+
+    <item
+        android:drawable="@drawable/sepet0001"
+        android:duration="100"/>
+    <item
+        android:drawable="@drawable/sepet0002"
+        android:duration="100"/>
+    <item
+        android:drawable="@drawable/sepet0003"
+        android:duration="100"/>
+    <item
+        android:drawable="@drawable/sepet0004"
+        android:duration="100"/>
+    <item
+        android:drawable="@drawable/sepet0005"
+        android:duration="100"/>
+    <item
+        android:drawable="@drawable/sepet0006"
+        android:duration="100"/>
+    <item
+        android:drawable="@drawable/sepet0007"
+        android:duration="100"/>
+    <item
+        android:drawable="@drawable/sepet0008"
+        android:duration="100"/>
+    <item
+        android:drawable="@drawable/sepet0009"
+        android:duration="100"/>
+
+
+</animation-list>
